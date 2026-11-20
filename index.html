@@ -48,8 +48,8 @@
 .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .pc{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:12px;display:flex;flex-direction:column}
-.pc .im{position:relative;border-radius:var(--r-s);overflow:hidden;aspect-ratio:4/3;background:#EAE7DF}
-.pc .im img{width:100%;height:100%;object-fit:cover;display:block}
+.pc .im{position:relative;border-radius:var(--r-s);overflow:hidden;aspect-ratio:4/3;background:#F6F3EC}
+.pc .im img{width:100%;height:100%;object-fit:contain;padding:6%;display:block}
 .badge{position:absolute;left:10px;top:10px;height:26px;padding:0 11px;border-radius:999px;font-size:12px;font-weight:600;display:inline-flex;align-items:center}
 .badge.g{background:#F2C14E;color:#1B2A44}.badge.w{background:#fff;color:var(--ink)}
 .pc .bd2{padding:16px 6px 6px;display:flex;flex-direction:column;flex:1}
@@ -86,6 +86,59 @@
 .know p{margin-top:10px;color:var(--mut);font-size:14.5px;min-height:64px}
 .know a{display:inline-block;margin-top:16px;font-weight:600;font-size:14px}
 @media (max-width:1100px){.hero,.b2b{grid-template-columns:1fr}.bgrid,.grid4{grid-template-columns:repeat(2,1fr)}.cats{grid-template-columns:repeat(3,1fr)}.know{grid-template-columns:repeat(2,1fr)}}
+.sec{padding:56px 40px 0}
+.brands{padding-top:48px}
+.hero h1{font-size:46px;line-height:1.06;letter-spacing:-.02em}
+.hero .l{min-height:340px;padding:40px 48px}
+.hero p{font-size:16px}
+.sh{margin-bottom:20px}
+.sh h2{font-size:24px;letter-spacing:-.01em}
+.blogos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.blogos span{height:84px;border:1px solid var(--line);border-radius:var(--r-s);display:grid;place-items:center;padding:0 24px;background:#fff}
+.blogos img{max-height:34px;max-width:100%;width:auto;display:block}
+.cgrid2{display:grid;grid-template-columns:repeat(2,minmax(0,360px));gap:16px}
+.cert2{display:flex;align-items:center;gap:16px;border:1px solid var(--line);border-radius:var(--r-s);padding:14px 18px}
+.cert2 img{height:44px;width:auto}
+.cert2 b{display:block;font-size:15px;font-weight:600}
+.cert2 span{color:var(--mut);font-size:13px}
+.know p{min-height:0;font-size:14px}
+.know h3,.bc h3{font-size:18px}.bc h3{font-size:24px}
+.bc{min-height:240px;padding:32px}
+@media (max-width:1100px){.blogos{grid-template-columns:repeat(2,1fr)}.cgrid2{grid-template-columns:1fr}.hero h1{font-size:34px}}
+
+/* v3 refinement: compact, quiet, less text */
+.sec{padding:40px 40px 0}
+.brands{padding-top:36px}
+.sh{margin-bottom:16px}
+.sh h2{font-size:20px;font-weight:600;letter-spacing:0}
+.hero{padding-top:24px}
+.hero .l{min-height:300px;padding:36px 44px}
+.hero .l:after{display:none}
+.hero h1{font-size:38px;line-height:1.12;letter-spacing:-.01em;font-weight:600;max-width:520px;margin-top:14px}
+.hero p{font-size:15px;margin-top:12px}
+.blogos{gap:12px}
+.blogos span{height:64px;padding:0 20px;border-radius:10px}
+.blogos img{max-height:28px}
+.cgrid2{grid-template-columns:repeat(2,minmax(0,280px));gap:12px}
+.cert2{gap:12px;padding:10px 14px;border-radius:10px;background:#fff}
+.cert2 img{height:30px}
+.cert2 b{font-size:14px;font-weight:600;letter-spacing:0}
+.cert2 span{font-size:12.5px}
+.pc h3{font-size:15.5px;letter-spacing:0}
+.grid4{gap:20px}
+.cats{gap:12px}
+.cat .n{font-size:14px;margin-top:8px}
+.b2b{gap:16px}
+.bc{min-height:180px;padding:28px}
+.bc h3{font-size:20px;letter-spacing:-.01em;font-weight:600}
+.bc p{font-size:14px;margin-top:8px}
+.know{gap:24px;grid-template-columns:repeat(3,1fr)}
+.know .k{border-top:1px solid var(--line);padding-top:16px}
+.know h3{font-size:16px;letter-spacing:0;font-weight:600}
+.know p{margin-top:6px;font-size:13.5px}
+.know a{margin-top:10px;font-size:13.5px}
+.chip{height:32px;font-size:13px}
+@media (max-width:1100px){.hero h1{font-size:30px}.sec{padding:32px 20px 0}.cgrid2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -94,30 +147,25 @@
 <header><div class="wrap">
 <div class="hd"><a class="logo" href="index.html"><img src="assets/img/oslopack-logo.svg" alt="oslopack" style="display:block;height:30px;width:auto"></a>
 <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>Search cups, boxes, bags…</div>
-<a class="signin">Sign in</a><a class="btn dark" href="#" data-open-request>Request list <b data-request-count>0</b></a></div>
-<nav class="nav"><a class="on" href="index.html">All products</a><a href="product.html">Cups &amp; lids</a><a href="index.html#best-sellers">Boxes</a><a href="index.html#best-sellers">Bags</a><a href="index.html#categories">Cutlery &amp; napkins</a><a>Industries</a><a href="request-for-quote.html">Bulk deals</a><a href="blog.html">Blog</a></nav>
+<a href="quotes-history.html" class="signin">Sign in</a><a class="btn dark" href="#" data-open-request>Request list <b data-request-count>0</b></a></div>
+<nav class="nav"><a class="on" href="index.html">All products</a><a href="product.html">Cups &amp; lids</a><a href="index.html#best-sellers">Boxes</a><a href="index.html#best-sellers">Bags</a><a href="index.html#categories">Cutlery &amp; napkins</a><a href="industries.html">Industries</a><a href="request-for-quote.html">Bulk deals</a><a href="blog.html">Blog</a></nav>
 </div></header>
-<section class="hero"><div class="l"><div><div class="eyebrow mono">New · Compostable range 2026</div>
-<h1>Eco packaging, priced by the carton.</h1>
-<p>Cups, boxes and bags for cafés and caterers. Wholesale prices, delivered in 48 hours across Doha.</p></div>
+<section class="hero"><div class="l"><div><h1>Eco packaging, priced by the carton.</h1>
+<p>Cups, boxes and bags for food businesses in Qatar.</p></div>
 <div class="cta"><a class="btn white" href="#best-sellers">Shop all products</a><a class="btn ghost" href="request-for-quote.html">Get a bulk quote</a></div></div>
 <div class="r"><img src="assets/img/hero.jpg" alt="Kraft paper bag, takeaway cups and food boxes on a blue background"></div></section>
-<section class="sec brands" id="brands"><div class="sh"><div><h2>Shop by brand</h2><div class="sub">Four ranges, one supplier. Mix them in a single quote.</div></div><a class="lk">Compare all brands →</a></div>
-<div class="bgrid">
-<a class="bd" style="--bg:#E6EEF9;--ink2:#0E2A52;--ac:#17488A"><div class="top"><span class="wm">oslo<b>pack</b></span><span class="ct">120+ items</span></div><h3>Everyday packaging for cafés and caterers</h3><p>Cups, boxes and bags in every size.</p><div class="th"><span><img src="assets/img/cup.jpg" alt="Paper cup"></span><span><img src="assets/img/box.jpg" alt="Kraft box"></span><span><img src="assets/img/bag.jpg" alt="Paper bag"></span></div><div class="go"><span>Shop Oslo Pack</span><i>→</i></div></a>
-<a class="bd" style="--bg:#DFEFEC;--ink2:#06403A;--ac:#095B53"><div class="top"><span class="wm">safe<b>pack</b></span><span class="ct">60+ items</span></div><h3>Food-safe, leak-proof and tamper-evident</h3><p>Built for delivery and hot or oily food.</p><div class="th"><span><img src="assets/img/box.jpg" alt="Takeaway box"></span><span><img src="assets/img/bagasse.jpg" alt="Container"></span><span><img src="assets/img/cup.jpg" alt="Cup"></span></div><div class="go"><span>Shop Safe Pack</span><i>→</i></div></a>
-<a class="bd" style="--bg:#E1F0F8;--ink2:#14305F;--ac:#1C4488"><div class="top"><span class="wm">oslo<b>fresh</b></span><span class="ct">45+ items</span></div><h3>Trays and packs for fresh food</h3><p>Salads, produce, bakery and ready meals.</p><div class="th"><span><img src="assets/img/bagasse.jpg" alt="Bagasse container"></span><span><img src="assets/img/box.jpg" alt="Box"></span><span><img src="assets/img/bag.jpg" alt="Bag"></span></div><div class="go"><span>Shop Oslo Fresh</span><i>→</i></div></a>
-<a class="bd" style="--bg:#ECEBF7;--ink2:#1B2A63;--ac:#243D85"><div class="top"><span class="wm">oslo<b>soft</b></span><span class="ct">80+ items</span></div><h3>Napkins, tissues and hygiene essentials</h3><p>Soft, absorbent and bulk-priced.</p><div class="th"><span><img src="assets/img/bag.jpg" alt="Paper bag"></span><span><img src="assets/img/cup.jpg" alt="Cup"></span><span><img src="assets/img/box.jpg" alt="Box"></span></div><div class="go"><span>Shop Oslo Soft</span><i>→</i></div></a>
-</div></section>
-<section class="trust"><div class="wrap"><span class="mono">Trusted &amp; certified</span>
-<span class="cert">FSC®</span><span class="cert">ISO 14001</span><span class="cert">BPI Compostable</span><span class="cert">EGAC</span><span class="cert">OK compost HOME</span></div></section>
-<section class="sec" id="best-sellers"><div class="sh"><div><h2>Best sellers</h2><div class="sub">Add items to your request. No payment now, our team confirms price and delivery.</div></div>
+<section class="sec brands" id="brands"><div class="sh"><h2>Shop by brand</h2></div>
+<div class="blogos"><span><img src="assets/img/oslopack-logo.svg" alt="Oslopack"></span><span><img src="assets/img/safepack.svg" alt="Safepack"></span><span><img src="assets/img/oslo-fresh.svg" alt="Oslo Fresh"></span><span><img src="assets/img/oslo-soft.svg" alt="Oslo Soft"></span></div></section>
+<section class="sec certs"><div class="sh"><h2>Certifications</h2></div>
+<div class="cgrid2"><div class="cert2"><img src="assets/img/ias-iso-badge.svg" alt="IAS accredited certification"><div><b>ISO 9001:2015</b><span>Quality management</span></div></div>
+<div class="cert2"><img src="assets/img/ias-iso-badge.svg" alt="IAS accredited certification"><div><b>ISO 22000:2018</b><span>Food safety management</span></div></div></div></section>
+<section class="sec" id="best-sellers"><div class="sh"><div><h2>Best sellers</h2></div>
 <div class="chips"><button class="chip on">All</button><button class="chip">Cups</button><button class="chip">Boxes</button><button class="chip">Bags</button></div></div>
 <div class="grid4">
-<div class="pc" data-href="product.html"><div class="im"><img src="assets/img/cup.jpg" alt="White paper cup 8 oz with lid"><span class="badge g">Best seller</span></div><div class="bd2"><h3>Paper cup 8 oz</h3><div class="meta">1,000 pcs / carton</div><div class="ft"><div class="price">QAR 148 <span>/ carton</span></div><button class="qb" data-add="cup">+ Add to request</button></div></div></div>
-<div class="pc" data-href="product.html"><div class="im"><img src="assets/img/box.jpg" alt="Kraft takeaway box with window"></div><div class="bd2"><h3>Kraft takeaway box</h3><div class="meta">300 pcs / carton</div><div class="ft"><div class="price">QAR 210 <span>/ carton</span></div><button class="qb" data-add="box">+ Add to request</button></div></div></div>
-<div class="pc" data-href="product.html"><div class="im"><img src="assets/img/bag.jpg" alt="Kraft paper bag, medium"></div><div class="bd2"><h3>Kraft paper bag, medium</h3><div class="meta">250 pcs / carton</div><div class="ft"><div class="price">QAR 96 <span>/ carton</span></div><button class="qb" data-add="bag">+ Add to request</button></div></div></div>
-<div class="pc" data-href="product.html"><div class="im"><img src="assets/img/bagasse.jpg" alt="Bagasse container 750 ml"><span class="badge w">Compostable</span></div><div class="bd2"><h3>Bagasse container 750 ml</h3><div class="meta">500 pcs / carton</div><div class="ft"><div class="price">QAR 260 <span>/ carton</span></div><button class="qb" data-add="bagasse">+ Add to request</button></div></div></div>
+<div class="pc" data-href="product.html"><div class="im"><img src="assets/img/products/cup.webp" alt="Kraft ripple paper cup 8 oz"><span class="badge g">Best seller</span></div><div class="bd2"><h3>Paper cup 8 oz</h3><div class="meta">1,000 pcs / carton</div><div class="ft"><div class="price">QAR 148 <span>/ carton</span></div><button class="qb" data-add="cup">+ Add to request</button></div></div></div>
+<div class="pc" data-href="product.html"><div class="im"><img src="assets/img/products/box.webp" alt="Kraft takeaway box, open"></div><div class="bd2"><h3>Kraft takeaway box</h3><div class="meta">300 pcs / carton</div><div class="ft"><div class="price">QAR 210 <span>/ carton</span></div><button class="qb" data-add="box">+ Add to request</button></div></div></div>
+<div class="pc" data-href="product.html"><div class="im"><img src="assets/img/products/bag.webp" alt="Kraft paper bag, medium"></div><div class="bd2"><h3>Kraft paper bag, medium</h3><div class="meta">250 pcs / carton</div><div class="ft"><div class="price">QAR 96 <span>/ carton</span></div><button class="qb" data-add="bag">+ Add to request</button></div></div></div>
+<div class="pc" data-href="product.html"><div class="im"><img src="assets/img/products/bagasse.webp" alt="Bagasse container 750 ml"><span class="badge w">Compostable</span></div><div class="bd2"><h3>Bagasse container 750 ml</h3><div class="meta">500 pcs / carton</div><div class="ft"><div class="price">QAR 260 <span>/ carton</span></div><button class="qb" data-add="bagasse">+ Add to request</button></div></div></div>
 </div></section>
 <section class="sec" id="categories"><div class="sh"><div><h2>Shop by category</h2></div></div>
 <div class="cats">
@@ -129,22 +177,21 @@
 <a class="cat" href="index.html#best-sellers"><div class="t blk">See all →</div><div class="n">All products</div></a>
 </div></section>
 <section class="sec"><div class="b2b">
-<div class="bc g"><div class="tx"><div><h3>Custom printed bags and cups</h3><p>Add your logo. From 500 pieces.</p></div><a class="btn white sm" href="request-for-quote.html">Start customising</a></div><div class="im"><img src="assets/img/custom-bag.jpg" alt="Kraft paper bag ready for custom printing"></div></div>
-<div class="bc c"><div class="tx"><div><h3>Contract pricing for regular orders</h3><p>Fixed prices, monthly delivery and net payment terms.</p></div><a class="btn line sm" href="contact.html">Talk to sales</a></div><div class="im"><img src="assets/img/box.jpg" alt="Kraft takeaway box"></div></div>
+<div class="bc g"><div class="tx"><div><h3>Custom printed bags and cups</h3><p>From 500 pieces.</p></div><a class="btn white sm" href="request-for-quote.html">Start customising</a></div><div class="im"><img src="assets/img/custom-bag.jpg" alt="Kraft paper bag ready for custom printing"></div></div>
+<div class="bc c"><div class="tx"><div><h3>Contract pricing for regular orders</h3><p>Fixed prices and monthly delivery.</p></div><a class="btn line sm" href="contact.html">Talk to sales</a></div><div class="im"><img src="assets/img/box.jpg" alt="Kraft takeaway box"></div></div>
 </div>
-<div class="logos"><span class="mono">Trusted by</span><span class="w">Brew Lab</span><span class="w">MARINA</span><span class="w">saffron</span><span class="w">Dune Hotels</span><span class="w">Baker&amp;Co</span><span class="w">Oasis</span></div></section>
-<section class="sec"><div class="sh"><div><h2>Good to know before you order</h2></div></div>
+</section>
+<section class="sec"><div class="sh"><div><h2>Before you order</h2></div></div>
 <div class="know">
-<div class="k"><h3>Shipping</h3><p>Delivery in 48 hours across Doha. Free over 50 cartons.</p><a href="shipping-policy.html">Delivery areas →</a></div>
-<div class="k"><h3>Returns</h3><p>Damaged or wrong items replaced within 7 days.</p><a href="refund-policy.html">Return policy →</a></div>
-<div class="k"><h3>Certifications</h3><p>FSC, ISO 14001 and home-compostable certified ranges.</p><a href="faqs.html">View certificates →</a></div>
-<div class="k"><h3>FAQs</h3><p>Minimum orders, payment terms, samples and custom printing.</p><a href="faqs.html">Read FAQs →</a></div>
+<div class="k"><h3>Shipping</h3><p>48-hour delivery across Doha.</p><a href="shipping-policy.html">Delivery areas →</a></div>
+<div class="k"><h3>Returns</h3><p>Replaced within 7 days.</p><a href="refund-policy.html">Return policy →</a></div>
+<div class="k"><h3>FAQs</h3><p>Minimums, payment terms and samples.</p><a href="faqs.html">Read FAQs →</a></div>
 </div></section>
 <footer><div class="ft1"><div><div class="mono">Newsletter</div><h4>Bulk deals and new eco ranges, once a month.</h4><div class="nl"><span>Business email address</span><span>→</span></div></div>
 <div class="cols">
 <div><h5>Shop</h5><a href="product.html">Cups &amp; lids</a><a href="index.html#best-sellers">Boxes &amp; containers</a><a href="index.html#best-sellers">Paper bags</a><a href="index.html#categories">Cutlery &amp; napkins</a><a href="request-for-quote.html">Bulk deals</a></div>
-<div><h5>Industries</h5><a>Cafés</a><a>Restaurants</a><a>Hotels</a><a>Caterers</a><a>Bakeries</a></div>
-<div><h5>Company</h5><a href="about.html">About us</a><a href="blog.html">Blog</a><a href="reviews.html">Reviews</a><a href="faqs.html">Certifications</a><a>Careers</a></div>
+<div><h5><a href="industries.html">Industries</a></h5><a href="industries/cafes.html">Cafés</a><a href="industries/restaurants.html">Restaurants</a><a href="industries/hotels.html">Hotels</a><a href="industries/caterers.html">Caterers</a><a href="industries/bakeries.html">Bakeries</a><a href="industries/takeaways.html">Takeaways</a></div>
+<div><h5>Company</h5><a href="about.html">About us</a><a href="blog.html">Blog</a><a href="reviews.html">Reviews</a><a href="faqs.html">Certifications</a><a href="contact.html">Careers</a></div>
 <div><h5>Help</h5><a href="shipping-policy.html">Delivery areas</a><a href="request-for-quote.html">How quotes work</a><a href="faqs.html">Payment &amp; LPO</a><a href="refund-policy.html">Returns</a><a href="contact.html">Contact us</a></div>
 </div></div>
 <div class="fb"><div><span>© 2026 oslopack</span><a href="terms.html">Terms &amp; Conditions</a><a href="shipping-policy.html">Shipping</a><a href="refund-policy.html">Refunds</a><a href="privacy-policy.html">Privacy Policy</a></div><div class="so"><a>Instagram</a><a>LinkedIn</a><a>Facebook</a></div></div></footer>
