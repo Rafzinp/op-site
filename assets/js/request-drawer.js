@@ -3,6 +3,9 @@
               [data-open-request]               opens the review step
    Counter:   any element with [data-request-count] shows the number of items. */
 (function () {
+  // Site root relative to this page (works from / and /industries/), derived from this script's own URL.
+  var cs = document.currentScript, ROOT = '';
+  try { ROOT = new URL('../../', cs.src).href; } catch (e) { ROOT = /\/industries\//.test(location.pathname) ? '../' : ''; }
   var PRODUCTS = {
     cup:     { name: 'Paper cup 8 oz', sub: 'Single-wall · FSC paper · Ø 80 mm', per: 'carton of 1,000', unit: 'cups', pcs: 1000, price: 148, img: 'assets/img/cup.jpg', tag: 'Best seller',
                opts: [['Size', ['4 oz', '8 oz', '12 oz', '16 oz'], 1], ['Lid', ['No lid', 'White PP lid', 'Fibre lid'], 1]] },
@@ -45,10 +48,32 @@
   var cur = null;       // product step draft {id, qty, sel[]}
   var lastRef = '';
 
-  function open() { scrim.classList.add('on'); box.classList.add('on'); document.body.style.overflow = 'hidden'; }
-  function close() { scrim.classList.remove('on'); box.classList.remove('on'); document.body.style.overflow = ''; }
+  var opener = null;
+  var FOCUSABLE = 'a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])';
+  var isOpen = function () { return box.classList.contains('on'); };
+  function open() {
+    if (!isOpen()) opener = document.activeElement;
+    scrim.classList.add('on'); box.classList.add('on'); document.body.style.overflow = 'hidden';
+    if (!box.contains(document.activeElement)) { box.setAttribute('tabindex', '-1'); box.focus({ preventScroll: true }); }
+  }
+  function close() {
+    var was = isOpen();
+    scrim.classList.remove('on'); box.classList.remove('on'); document.body.style.overflow = '';
+    if (was && opener && opener.focus && document.contains(opener)) opener.focus();
+    if (was) opener = null;
+  }
   scrim.addEventListener('click', close);
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!isOpen()) return;
+    if (e.key === 'Escape') return close();
+    if (e.key !== 'Tab') return;
+    var f = [].filter.call(box.querySelectorAll(FOCUSABLE), function (el) { return el.offsetParent !== null; });
+    if (!f.length) { e.preventDefault(); box.focus(); return; }
+    var a = document.activeElement, first = f[0], last = f[f.length - 1];
+    if (!box.contains(a) || a === box) { e.preventDefault(); (e.shiftKey ? last : first).focus(); }
+    else if (e.shiftKey && a === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && a === last) { e.preventDefault(); first.focus(); }
+  });
 
   function header(title, back, count) {
     return '<div class="rq-h"><div class="t">' + (back ? '<button class="rq-ib" data-act="' + back + '" aria-label="Back">' + ICON.back + '</button>' : '') +
@@ -65,7 +90,7 @@
     var after = items.filter(function (i) { return i.id !== cur.id; }).length + 1;
     var afterTotal = items.filter(function (i) { return i.id !== cur.id; }).reduce(function (s, i) { return s + PRODUCTS[i.id].price * i.qty; }, 0) + line;
     box.innerHTML = header('Add to request') +
-      '<div class="rq-b"><div class="rq-prow"><div class="im"><img src="' + p.img + '" alt="' + esc(p.name) + '"></div><div><h3>' + p.name + '</h3><div class="m">' + p.sub + '</div><div class="pr">' + fmt(p.price) + ' <span>/ ' + p.per + '</span></div></div></div>' +
+      '<div class="rq-b"><div class="rq-prow"><div class="im"><img src="' + ROOT + p.img + '" alt="' + esc(p.name) + '"></div><div><h3>' + p.name + '</h3><div class="m">' + p.sub + '</div><div class="pr">' + fmt(p.price) + ' <span>/ ' + p.per + '</span></div></div></div>' +
       opts + '<div class="rq-lbl">Quantity <span>Cartons of ' + p.pcs.toLocaleString('en-US') + '</span></div>' +
       '<div class="rq-step"><button data-act="dec" aria-label="Fewer">−</button><div class="v">' + cur.qty + '<small>cartons</small></div><button data-act="inc" aria-label="More">+</button></div>' +
       '<div class="rq-qk">' + QUICK.map(function (q) { return '<button class="rq-o' + (cur.qty === q ? ' on' : '') + '" data-q="' + q + '">' + q + (q === 50 ? ' · free delivery' : '') + '</button>'; }).join('') + '</div>' +
@@ -81,7 +106,7 @@
     }
     var list = items.map(function (i, idx) {
       var p = PRODUCTS[i.id];
-      return '<div class="rq-it"><div class="im"><img src="' + p.img + '" alt=""></div><div><h4>' + p.name + '</h4><div class="m">' + (i.qty * p.pcs).toLocaleString('en-US') + ' ' + p.unit + '</div>' +
+      return '<div class="rq-it"><div class="im"><img src="' + ROOT + p.img + '" alt=""></div><div><h4>' + p.name + '</h4><div class="m">' + (i.qty * p.pcs).toLocaleString('en-US') + ' ' + p.unit + '</div>' +
         '<div class="st"><button data-act="idec" data-i="' + idx + '" aria-label="Fewer">−</button><span>' + i.qty + '</span><button data-act="iinc" data-i="' + idx + '" aria-label="More">+</button></div></div>' +
         '<div class="pr">' + fmt(p.price * i.qty) + '<button data-act="rm" data-i="' + idx + '">Remove</button></div></div>';
     }).join('');
@@ -106,7 +131,7 @@
       '<div class="rq-s"><div class="n on">✓</div><div><b>Request received</b><span>Saved to your request history.</span></div></div>' +
       '<div class="rq-s"><div class="n">2</div><div><b>Our team confirms price and delivery</b><span>We check stock, delivery date and any custom printing.</span></div></div>' +
       '<div class="rq-s"><div class="n">3</div><div><b>You approve, then pay by bank transfer or LPO</b><span>Nothing is charged until you agree to the final quote.</span></div></div></div></div>' +
-      '<div class="rq-f"><div class="rq-fb"><button class="rq-btn alt" data-act="close">Keep browsing</button><a class="rq-btn" href="quotes-history.html">View my requests</a></div></div>';
+      '<div class="rq-f"><div class="rq-fb"><button class="rq-btn alt" data-act="close">Keep browsing</button><a class="rq-btn" href="' + ROOT + 'quotes-history.html">View my requests</a></div></div>';
   }
 
   box.addEventListener('click', function (e) {
